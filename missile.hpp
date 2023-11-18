@@ -1,5 +1,5 @@
-#ifndef missile_HPP
-#define missile_HPP
+#ifndef MISSILE_HPP
+#define MISSILE_HPP
 #include <iostream>
 #include "FlyingObject.hpp"
 #include <string>
@@ -16,9 +16,11 @@ public:
 
     //void Update() override;
 
+    //std::string GetTypeName() override;
     std::string GetTypeName() const override {
         return "Missile";
     }
+    //std::string GetTypeName() const;
 
     //std::string GetTypeName() const override;
 
