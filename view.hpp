@@ -16,7 +16,7 @@ private:
 public:
     View();
     ~View();
-    void Actualise_Affichage(const std::vector<FlyingObject *>& gameObjects, Framework* framework);
+    void Actualise_Affichage( std::vector<FlyingObject *> flyingObjects, Framework* framework);
     
 };
 
