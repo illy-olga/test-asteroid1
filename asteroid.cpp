@@ -11,6 +11,10 @@ Asteroid::Asteroid(double x, double y, double size, double speed, double angle)
 
 }
 
+/*std::string Asteroid::GetTypeName(){
+    return "Asteroid";
+}*/
+
 void Asteroid::move(double screenWidth, double screenHeight){
     m_xSpeed = getSpeed() * sin(M_PI * getAngle() /180);
     m_ySpeed = getSpeed() * cos(M_PI * getAngle() /180);
