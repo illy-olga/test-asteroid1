@@ -12,7 +12,7 @@ using namespace std;
 int WinMain(int argc, char* argv[])
 {
         std::cout << "Hello World!" << std::endl;
-        Controller* controller = new Controller(20,45,10);
+        Controller* controller = new Controller(60,100,80);
         controller->lauchGame();
 
         return 0;     
