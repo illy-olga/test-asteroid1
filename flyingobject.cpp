@@ -33,6 +33,8 @@ FlyingObject::FlyingObject(double x, double y, double size, double speed, double
     }
 }*/
 
+/*void FlyingObject::setDestroyed(bool destroyed) {
+    this->destroyed = destroyed;*/
 
 
 
