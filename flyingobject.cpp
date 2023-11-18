@@ -6,8 +6,8 @@ FlyingObject::FlyingObject(double x, double y, double size, double speed, double
 
 // FlyingObject::~FlyingObject() {}
 
-void FlyingObject::move(double screenWidth, double screenHeight){
-    double angle_radians = (M_PI *(180-m_angle)) /180;
+/*void FlyingObject::move(double screenWidth, double screenHeight){
+    double angle_radians =  (M_PI *(180-m_angle)) /180;
     double speedX = m_speed * sin(angle_radians);
     double speedY = m_speed * cos(angle_radians);
 
@@ -31,7 +31,7 @@ void FlyingObject::move(double screenWidth, double screenHeight){
         m_x = m_x + speedX;
         m_y = m_y + speedY;
     }
-}
+}*/
 
 
 
