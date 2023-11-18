@@ -1,6 +1,8 @@
 #include <iostream>
 #include "missile.hpp"
 #include <string>
+#include <cmath>
+#include "FlyingObject.hpp"
 
 using namespace std;
 
@@ -16,12 +18,15 @@ Missile::Missile(double x, double y, double size, double speed, double angle)
 
 void Missile::move(double screenWidth, double screenHeight)
 {
-    return;
+
+    setX(getX()+sin(getAngle() * M_PI/180)* getSpeed());
+    setY(getY() - cos(getAngle() * M_PI/180)* getSpeed());
+
 }
 
 
 
-/*std::string Missile::GetTypeName() const{
+/*std::string Missile::GetTypeName() {
     return "Missile";
 }*/
 
