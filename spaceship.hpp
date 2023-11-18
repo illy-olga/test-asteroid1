@@ -7,6 +7,8 @@ class Spaceship : public FlyingObject  {
 private :
 
     double m_angle;
+    double m_Xspeed;
+    double m_Yspeed;
 
 public:
     Spaceship(double x, double y, double size, double speed,double angle);
@@ -21,6 +23,10 @@ public:
 
     float getShieldLevel() const;
     bool isWarning() const;
+
+    void move(double screenWidth, double screenHeight) override;
+
+
 
 };
 
