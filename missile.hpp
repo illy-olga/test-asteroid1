@@ -12,7 +12,7 @@ class Missile: public FlyingObject
 public:
     Missile(double x, double y, double size, double speed, double angle);
 
-    bool move(double screenWidth,double screenHeight);
+    void move(double screenWidth,double screenHeight) override;
 
     //void Update() override;
 
