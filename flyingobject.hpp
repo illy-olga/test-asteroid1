@@ -34,6 +34,8 @@ public :
     void setSpeedX(double speedX);
     void setSpeedY(double speedY);
 
+    //void setDestroyed(bool destroyed);
+
 
     static bool Collide(const FlyingObject& o1, const FlyingObject& o2) ;
 
