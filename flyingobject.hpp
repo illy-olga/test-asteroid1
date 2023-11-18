@@ -18,7 +18,7 @@ public :
 
     FlyingObject(double x, double y, double size, double speed, double angle);
 
-    void move(double screenWidth, double screenHeight);
+    virtual void move(double screenWidth, double screenHeight) = 0;
 
     double getX() const;
     double getY() const;
