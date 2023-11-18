@@ -16,9 +16,9 @@ private:
     double m_ySpeed;
 
 public :
-    Asteroid(double x, double y, double size, double xSpeed, double ySpeed);
+    Asteroid(double x, double y, double size, double speed, double angle);
 
-    
+    /*
     double getXSpeed();
     double getYSpeed();
     
@@ -27,11 +27,9 @@ public :
     void setY(double y);
     void setXSpeed(double xSpeed);
     void setYSpeed(double ySpeed);
-    void setSize(double size);
+    void setSize(double size);*/
 
-    void move(double screenWidth, double screenHeight);
-
-    void move();
+    void move(double screenWidth, double screenHeight) override;
 
     std::string GetTypeName() const override {
         return "Asteroid";
@@ -40,6 +38,9 @@ public :
 };  
 
 #endif
+
+
+
 
 
 
