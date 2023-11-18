@@ -38,9 +38,11 @@ bool Spaceship::isWarning() const {
 
 }
 
-std::string Spaceship::GetTypeName() const {
+/*std::string Spaceship::GetTypeName() {
     return "Spaceship";
-}
+}*/
+
+
 
 void Spaceship::move(double screenWidth, double screenHeight){
     if (getX()>screenWidth)
