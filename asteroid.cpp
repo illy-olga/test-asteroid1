@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Asteroid.hpp"
 #include <string>
+#include <cmath>
 
 using namespace std;
 
@@ -11,25 +12,27 @@ Asteroid::Asteroid(double x, double y, double size, double speed, double angle)
 }
 
 void Asteroid::move(double screenWidth, double screenHeight){
+    m_xSpeed = getSpeed() * sin(M_PI * getAngle() /180);
+    m_ySpeed = getSpeed() * cos(M_PI * getAngle() /180);
 
-    if (m_x>screenWidth)
+    if (getX()>screenWidth)
     {
-        m_x = 0;
+        setX(0);
     }
-    else if (m_x<0)
+    else if (getX()<0)
     {
-        m_x = screenWidth;
+        setX(screenWidth);
     }
-    else if (m_y>screenHeight)
+    else if (getY()>screenHeight)
     {
-        m_y = 0;
+        setY(0);
     }
-    else if (m_y<0)
+    else if (getY()<0)
     {
-        m_y = screenHeight;
+        setY(screenHeight);
     }
     else {
-        m_x = m_x + m_xSpeed;
-        m_y = m_y + m_ySpeed;
+    setX(getX()+m_xSpeed);
+    setY(getY()+m_ySpeed);
     }
 }
