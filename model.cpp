@@ -9,7 +9,7 @@
 Model::Model(Framework* framework){
     spaceship = new Spaceship(framework->GetScreenWidth()/2,framework->GetScreenHeight()/2,20,0,0);
     missile = new Missile(0,0,5,3,30);
-    asteroid = new Asteroid(100,100,50,20,5);
+    asteroid = new Asteroid(100,100,50,10,15);
     flyingObjects = std::vector<FlyingObject*>();
     flyingObjects.push_back(spaceship);
     flyingObjects.push_back(asteroid);
