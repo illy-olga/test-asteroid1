@@ -19,12 +19,16 @@ public:
     void SpeedDown(double deceleration);
     void Rotate(double r_Angle);
 
-    std::string GetTypeName() const;
+    //std::string GetTypeName() override;
 
     float getShieldLevel() const;
     bool isWarning() const;
 
     void move(double screenWidth, double screenHeight) override;
+
+    std::string GetTypeName() const override {
+        return "Spaceship";
+    }
 
 
 
