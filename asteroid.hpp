@@ -31,13 +31,22 @@ public :
 
     void move(double screenWidth, double screenHeight) override;
 
+    //std::string GetTypeName() override;
+
     std::string GetTypeName() const override {
         return "Asteroid";
     }
+    
         
 };  
 
 #endif
+
+
+
+
+
+
 
 
 
