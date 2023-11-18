@@ -14,9 +14,9 @@ Missile::Missile(double x, double y, double size, double speed, double angle)
 
 }
 
-bool Missile::move(double screenWidth, double screenHeight)
+void Missile::move(double screenWidth, double screenHeight)
 {
-    return false;
+    return;
 }
 
 
@@ -28,5 +28,7 @@ bool Missile::move(double screenWidth, double screenHeight)
 // bool move(double screenWidth, double screenHeight);
 
 //void Missile::Update(){}
+
+
 
 
