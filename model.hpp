@@ -1,10 +1,9 @@
 #ifndef MODEL_H
 #define MODEL_H
-
 #include <vector>
-#include "FlyingObject.hpp"
-#include "Spaceship.hpp"
-#include "Asteroid.hpp"
+#include "flyingObject.hpp"
+#include "spaceship.hpp"
+#include "asteroid.hpp"
 #include "missile.hpp"
 #include "framework.hpp"
 #include <random>
@@ -17,13 +16,12 @@ private:
     Asteroid* asteroid;
     std::vector<FlyingObject*> flyingObjects;
     std::uniform_int_distribution<int> angleDist;
-    //void IniatialisationAsteroid();
 
     bool missileLaunched;
 
     static bool Collide(const FlyingObject& o1, const FlyingObject& o2);
 
-    //bool IsMissileLaunched() const;
+    std::vector<Asteroid*> asteroids;
 
 public:
     Model(Framework* framework);
@@ -45,13 +43,6 @@ public:
 
     bool CheckShipAsteroidCollision();
     bool CheckMissileAsteroidCollision();
-    
-
-    //bool missileLaunched;
-
-    //missile = nullptr;
-    //Spaceship& getSpaceship() const { return *spaceship;}
-    
 
     Spaceship* getSpaceship() const {
         return spaceship;
@@ -66,10 +57,10 @@ public:
     bool CheckMissileAsteroidCollision(Missile* missile, Asteroid* asteroid);
     bool CheckAsteroidSpaceshipCollision(Asteroid* asteroid, Spaceship* spaceship);
 
-    
 };
 
 #endif
+
 
 
 
