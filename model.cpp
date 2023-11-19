@@ -64,7 +64,7 @@ Model::Model(Framework* framework) : angleDist(-180,180) {
             case 5:
                 minX = 2 * (framework->GetScreenWidth() /3);
                 minY = framework->GetScreenHeight() /3;
-                maxX = framework->GetScreenWidth() /3;
+                maxX = framework->GetScreenWidth() ;
                 maxY= 2 * (framework->GetScreenHeight() /3);
                 break;
 
@@ -72,7 +72,14 @@ Model::Model(Framework* framework) : angleDist(-180,180) {
                 minX = 0;
                 minY = 2 * (framework->GetScreenHeight() /3);
                 maxX = framework->GetScreenWidth() /3;
-                maxY= framework->GetScreenHeight() /3;
+                maxY= framework->GetScreenHeight();
+                break;
+
+            case 7:
+                minX = framework->GetScreenWidth() / 3;
+                minY = 2 * (framework->GetScreenHeight() / 3);
+                maxX = 2 * (framework->GetScreenWidth() / 3);
+                maxY = framework->GetScreenHeight();
                 break;
 
             default:
@@ -83,7 +90,7 @@ Model::Model(Framework* framework) : angleDist(-180,180) {
         std::uniform_real_distribution<double> coordDistX(minX,maxX);
         std::uniform_real_distribution<double> coordDistY(minY,maxY);
 
-        std::uniform_real_distribution<double> randomSize(50,200);
+        std::uniform_real_distribution<double> randomSize(50,110);
         double random_size = randomSize(gen);
 
         double randomAngle = static_cast<double>(angleDist(gen));
@@ -108,7 +115,11 @@ Model::Model(Framework* framework) : angleDist(-180,180) {
 Model::~Model(){
     delete spaceship;
     delete missile;
-    delete asteroid;
+    //delete asteroid;
+
+    for (auto object : flyingObjects) {
+        delete object;
+    }
 }
 
 void Model::UpdateAction(int action){
@@ -119,9 +130,6 @@ void Model::UpdateAction(int action){
         case SDLK_RIGHT :
             spaceship->Rotate(20);
             break;
-        case SDLK_SPACE :
-            fireMissile();
-            break;
         case SDLK_UP:
             spaceship->SpeedUp(5);
             break;
@@ -130,18 +138,78 @@ void Model::UpdateAction(int action){
             break;        
         case SDLK_ESCAPE:
             exit(0);
-            break;    
+            break; 
+        case SDLK_SPACE:
+            FireMissile();
+        break;   
     }
 }
+
+
+
 
 void Model::UpdateData(Framework * framework){
     for (FlyingObject* object : flyingObjects ) 
     {
+       
+        
         object->move(framework->GetScreenWidth(),framework->GetScreenHeight());
+
+        if (object->GetTypeName() == "Missile" && object->getX() > framework->GetScreenWidth()) {
+            missileLaunched = false;
+            }
+
+        
+
+/*        if (CheckShipAsteroidCollision()) {
+        // Gérer la collision (par exemple, détruire le vaisseau ou l'astéroïde)
+            return -1;
+        }
+        if (CheckMissileAsteroidCollision()) {
+        // Gérer la collision (par exemple, détruire le missile et l'astéroïde)
+        }
+
+        bool asteroidsRemaining = false;
+        for (FlyingObject* object : flyingObjects) {
+        if (object->GetTypeName() == "Asteroid") {
+            asteroidsRemaining = true;
+            break;
+        }
     }
-    
+        if (!asteroidsRemaining) {
+            return 1;
+        }*/
+
+        //return 0;
+    }
+}
+
+
+
+void Model::FireMissile(){
+    if (!missileLaunched) {
+
+        double shipX = spaceship->getX();
+        double shipY = spaceship->getY();
+        double shipAngle = spaceship->getAngle();
+
+        double missileSpeed = 10;
+        double missileXSpeed = missileSpeed * sin(M_PI * shipAngle / 180.0);
+        double missileYSpeed = -missileSpeed * cos(M_PI * shipAngle / 180.0);
+
+        flyingObjects.push_back(new Missile(shipX,shipY,20,missileSpeed,shipAngle));
+
+        missileLaunched = true;
+
+        
+
+       
+       
+        
+    }
 
 }
+
 
 std::vector<FlyingObject*> Model::getFlyingObjects() const {
     return flyingObjects;    
@@ -156,9 +224,27 @@ void Model::moveShipRight() {
 
 }
 
-void Model::fireMissile(){
 
-}
+
+/*void Model::FireMissile(){
+    if (!missileLaunched) {
+        //if (missile == nullptr || missile->getX() > framework->GetScreenWidth()){
+        double shipX = spaceship->getX();
+        double shipY = spaceship->getY();
+        double shipAngle = spaceship->getAngle();
+
+        double missileSpeed = 10;
+        double missileXSpeed = missileSpeed * sin(M_PI * shipAngle / 180.0);
+        double missileYSpeed = -missileSpeed * cos(M_PI * shipAngle / 180.0);
+
+        flyingObjects.push_back(new Missile(shipX,shipY,20,missileSpeed,shipAngle));
+
+        missileLaunched = true;
+
+        
+    }
+
+}*/
 
 void Model::update() {
 
@@ -168,138 +254,16 @@ std::vector<FlyingObject*> Model::GetGameObjects() const {
     return flyingObjects;
 }
 
+bool Model::Collide(const FlyingObject& o1, const FlyingObject& o2) {
+    double distance = sqrt(pow(o1.getX() - o2.getX(), 2) + pow(o1.getY() - o2.getY(), 2));
+    double sumRadii = o1.getSize() + o2.getSize();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*void Model::generateRandomAsteroidPosition(){
-    std::default_random_engine generator(static_cast<unsigned>(time(0)));
-    std::uniform_int_distribution<int> zoneDistribution(0,7);
-    int selectedZone = zoneDistribution(generator);
-
-    int minX, maxX,minY,maxY;
-    switch(selectedZone) {
-        case 0:
-            minX = 0;
-            maxX = framework->GetScreenWidth()/3;
-            minY = 0;
-            maxY = framework->GetScreenHeight()/2;
-            break;
-
-    
+    if (distance < sumRadii)
+    {
+        return true;
     }
-
-    std::uniform_real_distribution<double> xDistribution(minX, maxX);
-    std::uniform_real_distribution<double> yDistribution(minY, maxY);
-
-    asteroid->setX(xDistribution(generator));
-    asteroid->setY(yDistribution(generator));
-
-double Model::generateRandomAngle() {
-    std::default_random_engine generator(static_cast<unsigned>(time(0)));
-    std::uniform_real_distribution<double> angleDistribution(-180.0, 180.0);
-    return angleDistribution(generator);
-} */
-
-
-
-
-
-
-
-
-/*void Model::IniatialisationAsteroid() {
-    std::mt19937 rng(std::random_device{}());
-
-    std::uniform_int_distribution<int> zoneDistribution(0,7);
-    int selectedZone = zoneDistribution(rng);
-
-
-
-    int minX = (selectedZone % 3) * (framework->GetScreenWidth()/3);
-    int maxX = minX + (framework->GetScreenWidth() / 3);
-    int minY = (selectedZone / 3) * (framework->GetScreenHeight()/3);
-    int maxY = minY + (framework->GetScreenHeight() / 3);
-    
-    std::uniform_real_distribution<double> xDistribution(minX,maxX);
-    std::uniform_real_distribution<double> yDistribution(minY,maxY);
-
-    double randomX = xDistribution(rng);
-    double randomY = yDistribution(rng);
-    
-    asteroid->setX(randomX);
-    asteroid->setY(randomY);
-
-    std::uniform_real_distribution<double> angleDistribution(-180,180);
-    double randomAngle = angleDistribution(rng);
-
-    double xSpeed = asteroid->getSpeed() * sin(M_PI * randomAngle /180);
-    double ySpeed = asteroid->getSpeed() * cos(M_PI * randomAngle /180);
-
-    //Asteroid* asteroid = new Asteroid();
-    asteroid->setSpeed(xSpeed);
-    asteroid->setSpeed(ySpeed);
-
-}*/
-
-
-/*
-void Model::CreateRandomAsteroid() {
-
-    std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());
-
-    std::uniform_int_distribution<int> zoneDistribution(0,7);
-    int selectedZone = zoneDistribution(generator);
-
-    double minX, maxX, minY, maxY;
-
-    std::uniform_real_distribution<double> coordDistributionX(minX,maxX);
-    std::uniform_int_distribution<double> coordDistributionY(minY,maxY);
-
-    double asteroidX = coordDistributionX(generator);
-    double asteroidY = coordDistributionY(generator);
-
-
-}*/
-
-
-/*Model model(screenWidth, screenHeight);
-
-Spaceship* spaceship = model.getSpaceship();
-Missile* missile = model.getMissile();
-Asteroid* asteroid = model.getAsteroid();*/
-
-/*void Model::MovementSpaceship_Gauche() {
-
-    spaceship->Movement_Gauche();
-}
-
-void Model::MovementSpaceship_Droite() {
-
-    spaceship->Movement_Droite();
-}
-
-void Model::Feu_missile(){
-
-    if (!missile->Vol()) {
-        missile->Launch(spaceship->getX(),spaceship->getY());
-
+    else 
+    {
+        return false;
     }
 }
-
-void Model::UpdateJeu(){
-
-
-}*/
