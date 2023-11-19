@@ -1,11 +1,11 @@
 #include <iostream>
 #include "framework.hpp"
-#include "Asteroid.hpp"
+#include "asteroid.hpp"
 #include "missile.hpp"
-#include "Spaceship.hpp"
-#include "Model.hpp"
-#include "View.hpp"
-#include "Controller.hpp"
+#include "spaceship.hpp"
+#include "model.hpp"
+#include "view.hpp"
+#include "controller.hpp"
 
 using namespace std;
 
