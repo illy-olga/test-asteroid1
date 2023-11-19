@@ -1,4 +1,4 @@
-#include "View.hpp"
+#include "view.hpp"
 #include <iostream>
 #include "framework.hpp"
 #include <string>
@@ -19,10 +19,11 @@ void View::Actualise_Affichage( std::vector<FlyingObject *> flyingObjects, Frame
         std::string objectType = object->GetTypeName();
 
         if (objectType == "Spaceship"){
-           
-            framework->DrawShip(object->getX(), object->getY(), object->getAngle(), 1.0,false);
+            double shieldLevel = dynamic_cast<Spaceship*>(object)->GetShieldLevel();
+            bool isWarning = dynamic_cast<Spaceship*>(object)->GetInvincible();
 
-        }
+            framework->DrawShip(object->getX(), object->getY(), object->getAngle(), shieldLevel, isWarning);
+                }
         else if (objectType == "Missile"){
            
             framework->DrawMissile(object->getX(),object->getY());
@@ -36,5 +37,6 @@ void View::Actualise_Affichage( std::vector<FlyingObject *> flyingObjects, Frame
     framework->Update();
 
 }
+
 
 
