@@ -13,12 +13,17 @@ class Model {
 private:
     Spaceship* spaceship;
     Missile* missile;
+
     Asteroid* asteroid;
     std::vector<FlyingObject*> flyingObjects;
     std::uniform_int_distribution<int> angleDist;
     //void IniatialisationAsteroid();
 
+    bool missileLaunched;
 
+    static bool Collide(const FlyingObject& o1, const FlyingObject& o2);
+
+    //bool IsMissileLaunched() const;
 
 public:
     Model(Framework* framework);
@@ -36,6 +41,15 @@ public:
     
     void setScreenSize(int screenWidth, int screenHeight);
 
+    void FireMissile();
+
+    bool CheckShipAsteroidCollision();
+    bool CheckMissileAsteroidCollision();
+    
+
+    //bool missileLaunched;
+
+    //missile = nullptr;
     //Spaceship& getSpaceship() const { return *spaceship;}
     
 
@@ -48,6 +62,10 @@ public:
     Asteroid* getAsteroid() const {
         return asteroid;
     }
+
+    bool CheckMissileAsteroidCollision(Missile* missile, Asteroid* asteroid);
+    bool CheckAsteroidSpaceshipCollision(Asteroid* asteroid, Spaceship* spaceship);
+
     
 };
 
