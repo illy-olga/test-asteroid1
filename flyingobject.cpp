@@ -1,42 +1,8 @@
-#include "FlyingObject.hpp"
+#include "flyingObject.hpp"
 #include <cmath>
 
 FlyingObject::FlyingObject(double x, double y, double size, double speed, double angle)
     : m_x(x),m_y(y), m_size(size),m_speed(speed),m_angle(angle) {}
-
-// FlyingObject::~FlyingObject() {}
-
-/*void FlyingObject::move(double screenWidth, double screenHeight){
-    double angle_radians =  (M_PI *(180-m_angle)) /180;
-    double speedX = m_speed * sin(angle_radians);
-    double speedY = m_speed * cos(angle_radians);
-
-    if (m_x>screenWidth)
-    {
-        m_x = 0;
-    }
-    else if (m_x<0)
-    {
-        m_x = screenWidth;
-    }
-    else if (m_y>screenHeight)
-    {
-        m_y= 0;
-    }
-    else if (m_y<0)
-    {
-        m_y = screenHeight;
-    }
-    else {
-        m_x = m_x + speedX;
-        m_y = m_y + speedY;
-    }
-}*/
-
-/*void FlyingObject::setDestroyed(bool destroyed) {
-    this->destroyed = destroyed;*/
-
-
 
 double FlyingObject::getX() const {
     return m_x;
@@ -90,8 +56,8 @@ bool FlyingObject::Collide( const FlyingObject& o1, const FlyingObject& o2)
         return false;
     }
 
-
-
 }
+
+
 
 
