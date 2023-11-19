@@ -38,4 +38,3 @@ void View::Actualise_Affichage( std::vector<FlyingObject *> flyingObjects, Frame
 }
 
 
-
