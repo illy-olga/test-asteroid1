@@ -1,7 +1,7 @@
 #ifndef Asteroid_HPP
 #define Asteroid_HPP
 #include <iostream>
-#include "FlyingObject.hpp"
+#include "flyingObject.hpp"
 #include <string>
 
 using namespace std;
@@ -14,24 +14,14 @@ private:
     double m_size;
     double m_xSpeed;
     double m_ySpeed;
+    double nbExplosionsLeft;
 
 public :
     Asteroid(double x, double y, double size, double speed, double angle);
-
-    /*
-    double getXSpeed();
-    double getYSpeed();
+    Asteroid* Explode(double xSpeed, double ySpeed);
+    double GetExplosionsLeft() const;
     
-
-    void setX(double x);
-    void setY(double y);
-    void setXSpeed(double xSpeed);
-    void setYSpeed(double ySpeed);
-    void setSize(double size);*/
-
     void move(double screenWidth, double screenHeight) override;
-
-    //std::string GetTypeName() override;
 
     std::string GetTypeName() const override {
         return "Asteroid";
@@ -41,6 +31,8 @@ public :
 };  
 
 #endif
+
+
 
 
 
