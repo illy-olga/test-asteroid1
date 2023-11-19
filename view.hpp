@@ -1,9 +1,8 @@
 #ifndef VIEW_H
 #define VIEW_H
-
 #include <vector>
-#include "FlyingObject.hpp"
-#include "Model.hpp"
+#include "flyingObject.hpp"
+#include "model.hpp"
 #include "framework.hpp"
 
 class View {
@@ -12,7 +11,6 @@ private:
     SDL_Texture* textureAsteroid;
     SDL_Texture* textureMissile;
 
-    //std::vector<Sprite> sprites;
 public:
     View();
     ~View();
